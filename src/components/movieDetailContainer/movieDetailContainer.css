@@ -1,0 +1,35 @@
+.MovieDetailContainer{
+    padding: 20px 30px;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+}
+.cover-img{
+    object-fit: cover;
+    height: 350px;
+}
+.movie-info{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    overflow: hidden;
+    margin: 4px 0;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+}
+.movie-name{
+    font-size: 22px;
+  font-weight: 600;
+  color: black;
+  /* margin: 15px 0; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+}
+.close{
+    width: 40px;
+    height: 40px;
+}
