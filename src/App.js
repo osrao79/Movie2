@@ -16,6 +16,7 @@ function App() {
   const [totalPosts, settotalPosts] = useState(0);
   const [state, setState] = useState(true);
   const [refresh, setRefresh] = useState(false)
+  const [filtered, setFiltered] = useState([])
 
   const url =
   "https://d3dyfaf3iutrxo.cloudfront.net/general/upload/8cc907c1bb9b404e8cb181825938fc23-data.json";
@@ -27,6 +28,7 @@ useEffect(() => {
     .then((r) => r.json())
     .then((r) => {
       updateMovieList(r);
+      setFiltered(r)
       settotalPosts(r.length);
     });
 }, [refresh]);
@@ -41,7 +43,7 @@ for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
 const indexOfLastPost = currentPage * postsPerPage;
 const indexOfFirstPost = indexOfLastPost - postsPerPage;
 const currentPosts =
-  movieList && movieList.slice(indexOfFirstPost, indexOfLastPost);
+  filtered && filtered.slice(indexOfFirstPost, indexOfLastPost);
 
 useEffect(() => {
 }, [state])
@@ -51,10 +53,14 @@ setSelectedMovie(movie)
 }
 
 useEffect(() => {
-updateMovieList((movieList) =>
-    movieList.filter((x) => x.Title.includes(searchQuery))
-  );
+  const arr = []
+ movieList.filter((x)=>
+ x.Title.toLowerCase().includes(searchQuery.toLocaleLowerCase()) ? arr.push(x) : null
+ )
+ setFiltered(arr)
 }, [searchQuery])
+
+console.log(filtered)
 
 const onTextChange = (e) => {
   updateSearchQuery(e.target.value);
